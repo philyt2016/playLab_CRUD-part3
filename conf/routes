@@ -8,6 +8,8 @@ GET     /                     controllers.HomeController.index(name: String ?="v
 
 GET     /about                      controllers.HomeController.about
 
+GET     /updateProduct            controllers.HomeController.updateProduct(id:Long)
+
 GET     /products                   controllers.HomeController.products
 
 # Request to load the add product form

@@ -69,9 +69,14 @@ public class HomeController extends Controller {
 
         // Extract the product from the form object
         Product newProduct = newProductForm.get();
-
+           if (newProduct.getId() == null) {
+               newProduct.save();
+           }
+           else if (newProduct.getId() != null){
+               newProduct.update();
+           }
         // Save to the database via Ebean (remember Product extends Model)
-        newProduct.save();
+     
 
         // Set a success message in temporary flash
         // for display in return view
@@ -91,5 +96,22 @@ public class HomeController extends Controller {
 
         // Redirect to products page
         return redirect(routes.HomeController.products());
+    }
+
+    @Transactional
+    public Result updateProduct(Long id) {
+
+        Product p;
+        Form<Product> productForm;
+
+        try {
+            p = Product.find.byId(id);
+
+            productForm = formFactory.form(Product.class).fill(p);
+        } catch (Exception ex) {
+
+            return badRequest("error");
+        }
+        return ok(addProduct.render(productForm));
     }
 }

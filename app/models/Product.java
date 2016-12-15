@@ -3,9 +3,10 @@ package models;
 import java.util.*;
 import javax.persistence.*;
 
-import com.avaje.ebean.Model;
 import play.data.format.*;
 import play.data.validation.*;
+
+import com.avaje.ebean.Model;
 
 // Product Entity managed by the ORM
 @Entity
@@ -32,9 +33,10 @@ public class Product extends Model {
     @Constraints.Required
     private double price;
 
-    // Default constructor
     public  Product() {
+
     }
+    
 
     // Constructor to initialise object
     public  Product(Long id, String name, String description, int stock, double price) {
